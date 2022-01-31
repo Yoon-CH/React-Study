@@ -1,7 +1,12 @@
-import React from "react";
+import React from 'react';
+import BasicJSX from './React/BasicJSX';
 
 function ReactStudy() {
-  return <div></div>;
+  return (
+    <>
+      <BasicJSX />
+    </>
+  );
 }
 
 export default ReactStudy;
