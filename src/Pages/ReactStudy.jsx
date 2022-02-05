@@ -1,5 +1,6 @@
 import React from 'react';
 import BasicJSX from './React/BasicJSX';
+import LifeCycle from './React/LifeCycle';
 import PropsState from './React/PropsState';
 
 function ReactStudy() {
@@ -7,6 +8,7 @@ function ReactStudy() {
     <>
       <BasicJSX />
       <PropsState name="react" />
+      <LifeCycle />
     </>
   );
 }
