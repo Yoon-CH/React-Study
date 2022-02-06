@@ -16,7 +16,7 @@ function PropsState({ name }) {
     <>
       <Main>Props / State 기본문법</Main>
       <h2>Props 부모가 자식한테 넘겨주는 값.</h2>
-      <div>내 이름은 {name} 이야</div>
+      <p>내 이름은 {name} 이야</p>
       <div>
         부모컴포넌트에서 name="react"를 받아와서 자식 컴포넌트에서 {name}을
         사용함.
