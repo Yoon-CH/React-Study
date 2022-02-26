@@ -14,6 +14,7 @@ function InputState({ onData }) {
   const handleSubmit = e => {
     e.preventDefault();
     onData({ name: isValue.name, phone: isValue.phone });
+    setIsValue({ name: '', phone: '' });
   };
 
   return (

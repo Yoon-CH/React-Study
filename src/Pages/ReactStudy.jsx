@@ -1,12 +1,14 @@
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import BasicJSX from './React/BasicJSX';
 import InputState from './React/InputState';
 import LifeCycle from './React/LifeCycle';
 import PropsState from './React/PropsState';
 
 function ReactStudy() {
+  const [useInfo, setUseInfo] = useState([]);
+  const id = useRef(-1);
   const handleData = data => {
-    console.log(data);
+    setUseInfo(useInfo.concat({ ...data, id: (id.current += 1) }));
   };
 
   return (
@@ -15,6 +17,7 @@ function ReactStudy() {
       <PropsState name="react" />
       <LifeCycle />
       <InputState onData={handleData} />
+      {JSON.stringify(useInfo)}
     </>
   );
 }
