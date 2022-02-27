@@ -1,5 +1,6 @@
 import React, { useRef, useState } from 'react';
 import BasicJSX from './React/BasicJSX';
+import InputInfoList from './React/InputInfoList';
 import InputState from './React/InputState';
 import LifeCycle from './React/LifeCycle';
 import PropsState from './React/PropsState';
@@ -17,7 +18,7 @@ function ReactStudy() {
       <PropsState name="react" />
       <LifeCycle />
       <InputState onData={handleData} />
-      {JSON.stringify(useInfo)}
+      <InputInfoList useInfo={useInfo} />
     </>
   );
 }
