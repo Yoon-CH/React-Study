@@ -1,14 +1,18 @@
 import React from 'react';
 import styled from 'styled-components';
 
-function InputInfo({ useInfo }) {
-  const { name, phone, id } = useInfo;
+function InputInfo({ useInfo, onRemove }) {
+  const { name, phone } = useInfo;
+  const handleRemove = () => {
+    onRemove(useInfo.id);
+  };
   return (
     <Information>
       <div>
         <b>{name}</b>
       </div>
       <div>{phone}</div>
+      <button onClick={handleRemove}>삭제</button>
     </Information>
   );
 }

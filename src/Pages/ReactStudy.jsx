@@ -11,6 +11,9 @@ function ReactStudy() {
   const handleData = data => {
     setUseInfo(useInfo.concat({ ...data, id: (id.current += 1) }));
   };
+  const handleRemove = id => {
+    setUseInfo(useInfo.filter(useInfo => useInfo.id !== id));
+  };
 
   return (
     <>
@@ -18,7 +21,7 @@ function ReactStudy() {
       <PropsState name="react" />
       <LifeCycle />
       <InputState onData={handleData} />
-      <InputInfoList useInfo={useInfo} />
+      <InputInfoList useInfo={useInfo} onRemove={handleRemove} />
     </>
   );
 }
