@@ -7,12 +7,29 @@ import PropsState from './React/PropsState';
 
 function ReactStudy() {
   const [useInfo, setUseInfo] = useState([]);
+
   const id = useRef(-1);
+
   const handleData = data => {
     setUseInfo(useInfo.concat({ ...data, id: (id.current += 1) }));
   };
+
   const handleRemove = id => {
     setUseInfo(useInfo.filter(useInfo => useInfo.id !== id));
+  };
+
+  const handleUpdate = (id, data) => {
+    setUseInfo(
+      useInfo.map(info => {
+        if (info.id === id) {
+          return {
+            id,
+            ...data,
+          };
+        }
+        return info;
+      })
+    );
   };
 
   return (
@@ -21,7 +38,11 @@ function ReactStudy() {
       <PropsState name="react" />
       <LifeCycle />
       <InputState onData={handleData} />
-      <InputInfoList useInfo={useInfo} onRemove={handleRemove} />
+      <InputInfoList
+        useInfo={useInfo}
+        onRemove={handleRemove}
+        onUpdate={handleUpdate}
+      />
     </>
   );
 }
