@@ -33,6 +33,14 @@ function InputInfo({ useInfo, onRemove, onUpdate }) {
     });
   };
 
+  // const dd = React.memo((props, nextProps) => {
+  //   if ((edit && isValue) !== nextProps) {
+  //     return true;
+  //   }
+  //   return useInfo !== props.useInfo;
+  // });
+
+  console.log(name);
   return (
     <Information>
       {edit ? (
@@ -58,7 +66,10 @@ function InputInfo({ useInfo, onRemove, onUpdate }) {
   );
 }
 
-export default InputInfo;
+export default React.memo(
+  InputInfo,
+  (props, nextProps) => props.useInfo === nextProps.useInfo
+);
 
 const Information = styled.div`
   margin: 8px;
