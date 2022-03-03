@@ -3,7 +3,6 @@ import InputInfo from './InputInfo';
 
 function InputInfoList({ useInfo, onRemove, onUpdate }) {
   if (!useInfo) return null;
-  console.log('lenderList');
   const list = useInfo.map(useInfo => (
     <InputInfo
       useInfo={useInfo}

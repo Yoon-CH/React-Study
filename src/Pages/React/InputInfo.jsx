@@ -33,14 +33,6 @@ function InputInfo({ useInfo, onRemove, onUpdate }) {
     });
   };
 
-  // const dd = React.memo((props, nextProps) => {
-  //   if ((edit && isValue) !== nextProps) {
-  //     return true;
-  //   }
-  //   return useInfo !== props.useInfo;
-  // });
-
-  console.log(name);
   return (
     <Information>
       {edit ? (
