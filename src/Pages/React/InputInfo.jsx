@@ -5,7 +5,7 @@ function InputInfo({ useInfo, onRemove, onUpdate }) {
   const [edit, setEdit] = useState(false);
   const [isValue, setIsValue] = useState({ name: '', phone: '' });
 
-  const { name, phone } = useInfo;
+  const { name, phone, id } = useInfo;
 
   const handleRemove = () => {
     onRemove(useInfo.id);
@@ -58,10 +58,7 @@ function InputInfo({ useInfo, onRemove, onUpdate }) {
   );
 }
 
-export default React.memo(
-  InputInfo,
-  (props, nextProps) => props.useInfo === nextProps.useInfo
-);
+export default InputInfo;
 
 const Information = styled.div`
   margin: 8px;
