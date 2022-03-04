@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import BasicJSX from './React/BasicJSX';
 import InputInfoList from './React/InputInfoList';
 import InputState from './React/InputState';
@@ -20,7 +20,7 @@ function ReactStudy() {
   };
 
   const handleRemove = id => {
-    setUseInfo(useInfo.filter(useInfo => useInfo.id !== id));
+    setUseInfo(useInfo.filter(info => info.id !== id));
   };
 
   const handleUpdate = (id, data) => {

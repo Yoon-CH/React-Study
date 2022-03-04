@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { createRef, useState } from 'react';
 import styled from 'styled-components';
 
 function InputState({ onData }) {
@@ -15,7 +15,10 @@ function InputState({ onData }) {
     e.preventDefault();
     onData({ name: isValue.name, phone: isValue.phone });
     setIsValue({ name: '', phone: '' });
+    input.current.focus();
   };
+
+  const input = React.createRef();
 
   return (
     <>
@@ -32,6 +35,7 @@ function InputState({ onData }) {
           placeholder="이름"
           onChange={handleChange}
           value={isValue.name}
+          ref={input}
         />
         <input
           name="phone"
