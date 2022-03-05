@@ -44,5 +44,7 @@ const StudySection = styled.div`
   display: flex;
   justify-content: space-around;
   align-items: center;
-  margin: 200px;
+  width: 100%;
+  height: 100vh;
+  background: linear-gradient(to bottom right, cyan, blue);
 `;
