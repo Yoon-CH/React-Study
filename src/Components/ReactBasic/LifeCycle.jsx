@@ -31,12 +31,12 @@ function LifeCycle() {
         useEffect는 기본적으로 componentDidMount, componentDidUpdate,
         componentWillUnmount, getDerivedStateFromProps의 역할을 모두 수행한다.
       </div>
-      {useEffect(() => {
+      {/* {useEffect(() => {
         console.log('Hook의 기본형태');
       })}
       {useEffect(() => {
         console.log('componentDidMount');
-      }, ['의존성배열'])}
+      }, ['의존성배열'])} */}
     </>
   );
 }

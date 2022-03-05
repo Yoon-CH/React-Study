@@ -1,11 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react';
-import BasicJSX from './React/BasicJSX';
-import InputInfoList from './React/InputInfoList';
-import InputState from './React/InputState';
-import LifeCycle from './React/LifeCycle';
-import PropsState from './React/PropsState';
+import BasicJSX from '../Components/ReactBasic/BasicJSX';
+import InputInfoList from '../Components/ReactBasic/InputInfoList';
+import InputState from '../Components/ReactBasic/InputState';
+import LifeCycle from '../Components/ReactBasic/LifeCycle';
+import PropsState from '../Components/ReactBasic/PropsState';
 
-function ReactStudy() {
+function ReactBasicStudy() {
   const [useInfo, setUseInfo] = useState([]);
   const [keyword, setKeyword] = useState('');
 
@@ -57,4 +57,4 @@ function ReactStudy() {
   );
 }
 
-export default ReactStudy;
+export default ReactBasicStudy;

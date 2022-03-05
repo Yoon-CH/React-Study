@@ -5,7 +5,7 @@ function InputInfo({ useInfo, onRemove, onUpdate }) {
   const [edit, setEdit] = useState(false);
   const [isValue, setIsValue] = useState({ name: '', phone: '' });
 
-  const { name, phone, id } = useInfo;
+  const { name, phone } = useInfo;
 
   const handleRemove = () => {
     onRemove(useInfo.id);
