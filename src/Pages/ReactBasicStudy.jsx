@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import styled from 'styled-components';
 import BasicJSX from '../Components/ReactBasic/BasicJSX';
 import InputInfoList from '../Components/ReactBasic/InputInfoList';
 import InputState from '../Components/ReactBasic/InputState';
@@ -42,7 +43,7 @@ function ReactBasicStudy() {
   }, [useInfo]);
 
   return (
-    <>
+    <BasicSection>
       <BasicJSX />
       <PropsState name="react" />
       <LifeCycle />
@@ -53,8 +54,15 @@ function ReactBasicStudy() {
         onRemove={handleRemove}
         onUpdate={handleUpdate}
       />
-    </>
+    </BasicSection>
   );
 }
 
 export default ReactBasicStudy;
+
+const BasicSection = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
