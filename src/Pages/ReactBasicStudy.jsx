@@ -6,7 +6,7 @@ import InputState from '../Components/ReactBasic/InputState';
 import LifeCycle from '../Components/ReactBasic/LifeCycle';
 import PropsState from '../Components/ReactBasic/PropsState';
 
-function ReactBasicStudy() {
+const ReactBasicStudy = () => {
   const [useInfo, setUseInfo] = useState([]);
   const [keyword, setKeyword] = useState('');
 
@@ -56,7 +56,7 @@ function ReactBasicStudy() {
       />
     </BasicSection>
   );
-}
+};
 
 export default ReactBasicStudy;
 
