@@ -1,13 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
-import UseInput from '../Components/ReactHooks/UseInput';
 import UseState from '../Components/ReactHooks/UseState';
+import UseEffect from '../Components/ReactHooks/UseEffect';
 
 const ReactHookStudy = () => {
   return (
     <HookSection>
       <UseState />
-      <UseInput />
+      <UseEffect />
     </HookSection>
   );
 };
