@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 function BasicJSX() {
   const name = 'react';
+
   const style = {
     //css 스타일을 입힐 때는 객체 형태를 사용한다.
     backgroundColor: 'yellow',
