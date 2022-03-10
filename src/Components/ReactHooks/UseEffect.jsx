@@ -1,50 +1,11 @@
-import React, { useState, useEffect, useRef } from 'react';
-
-const useTitle = initialTitle => {
-  const [title, setTitle] = useState(initialTitle);
-
-  const updateTitle = () => {
-    const htmlTitle = document.querySelector('title');
-    htmlTitle.innerText = title;
-  };
-  useEffect(() => {
-    updateTitle();
-  }, [title]);
-  return setTitle;
-};
-
-const useClick = onClick => {
-  const element = useRef();
-  useEffect(() => {
-    if (element.current) {
-      element.current.addEventListener('click', onClick);
-    }
-    return () => {
-      if (element.current) {
-        element.current.removeEventListener('click', onClick);
-      }
-    };
-  }, []);
-  return element;
-};
-
-const usePreventLeave = () => {
-  const listener = event => {
-    event.preventDefault();
-    event.returnValue = '';
-  };
-  const enablePrevent = () => window.addEventListener('beforeunload', listener);
-  const disablePrevent = () =>
-    window.removeEventListener('beforeunload', listener);
-  return { enablePrevent, disablePrevent };
-};
+import React, { useState, useEffect } from 'react';
+import { usePreventLeave, useClick, useTitle } from '../../utils/Hooks';
 
 const UseEffect = () => {
   const [number, setNumber] = useState(0);
   const [newNumber, setNewNumber] = useState(0);
 
   const hello = () => console.log('hello');
-
   const sayHello = () => console.log('onClick');
 
   const titleUpdater = useTitle('Loading...');
