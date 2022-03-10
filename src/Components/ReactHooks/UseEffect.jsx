@@ -28,6 +28,17 @@ const useClick = onClick => {
   return element;
 };
 
+const usePreventLeave = () => {
+  const listener = event => {
+    event.preventDefault();
+    event.returnValue = '';
+  };
+  const enablePrevent = () => window.addEventListener('beforeunload', listener);
+  const disablePrevent = () =>
+    window.removeEventListener('beforeunload', listener);
+  return { enablePrevent, disablePrevent };
+};
+
 const UseEffect = () => {
   const [number, setNumber] = useState(0);
   const [newNumber, setNewNumber] = useState(0);
@@ -40,6 +51,8 @@ const UseEffect = () => {
   setTimeout(() => titleUpdater('Home'), 3000);
 
   const title = useClick(sayHello);
+
+  const { enablePrevent, disablePrevent } = usePreventLeave();
 
   useEffect(() => {
     hello();
@@ -54,6 +67,11 @@ const UseEffect = () => {
       </div>
       <br />
       <h3 ref={title}>useClick 커스텀 훅</h3>
+      <br />
+      <div>
+        <button onClick={enablePrevent}>Protect</button>
+        <button onClick={disablePrevent}>unProtect</button>
+      </div>
     </>
   );
 };
