@@ -1,5 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { usePreventLeave, useClick, useTitle } from '../../utils/Hooks';
+import {
+  usePreventLeave,
+  useClick,
+  useTitle,
+  useBeforeLeave,
+} from '../../utils/Hooks';
 
 const UseEffect = () => {
   const [number, setNumber] = useState(0);
@@ -14,6 +19,9 @@ const UseEffect = () => {
   const title = useClick(sayHello);
 
   const { enablePrevent, disablePrevent } = usePreventLeave();
+
+  const beForeLife = () => console.log('떠나지 마세요!');
+  useBeforeLeave(beForeLife);
 
   useEffect(() => {
     hello();
@@ -33,6 +41,8 @@ const UseEffect = () => {
         <button onClick={enablePrevent}>Protect</button>
         <button onClick={disablePrevent}>unProtect</button>
       </div>
+      <br />
+      <h3>떠나지마요!(console.log확인)</h3>
     </>
   );
 };
