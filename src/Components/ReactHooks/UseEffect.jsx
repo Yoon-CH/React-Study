@@ -4,6 +4,7 @@ import {
   useClick,
   useTitle,
   useBeforeLeave,
+  useFadeIn,
 } from '../../utils/Hooks';
 
 const UseEffect = () => {
@@ -22,6 +23,10 @@ const UseEffect = () => {
 
   const beForeLife = () => console.log('떠나지 마세요!');
   useBeforeLeave(beForeLife);
+
+  const fadeInH3 = useFadeIn(3);
+
+  const fadeInp = useFadeIn(6);
 
   useEffect(() => {
     hello();
@@ -43,6 +48,9 @@ const UseEffect = () => {
       </div>
       <br />
       <h3>떠나지마요!(console.log확인)</h3>
+      <br />
+      <h3 {...fadeInH3}>useFadeIn 효과</h3>
+      <p {...fadeInp}>잘 보이나요?</p>
     </>
   );
 };
