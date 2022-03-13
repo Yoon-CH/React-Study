@@ -6,6 +6,7 @@ import {
   useBeforeLeave,
   useFadeIn,
   useScroll,
+  useScreen,
 } from '../../utils/Hooks';
 import styled from 'styled-components';
 
@@ -15,6 +16,10 @@ const UseEffect = () => {
 
   const hello = () => console.log('hello');
   const sayHello = () => console.log('onClick');
+
+  useEffect(() => {
+    hello();
+  }, [number]);
 
   const titleUpdater = useTitle('Loading...');
   setTimeout(() => titleUpdater('Home'), 3000);
@@ -32,9 +37,11 @@ const UseEffect = () => {
 
   const { y } = useScroll();
 
-  useEffect(() => {
-    hello();
-  }, [number]);
+  const onFullS = callback => {
+    console.log(callback ? 'we are full' : 'we are small');
+  };
+
+  const { element, triggerFullScreen, exitFullScreen } = useScreen(onFullS);
 
   return (
     <UseEffectSection>
@@ -56,15 +63,40 @@ const UseEffect = () => {
       <h3 {...fadeInH3}>useFadeIn 효과</h3>
       <p {...fadeInp}>잘 보이나요?</p>
       <br />
-      <h3 style={{ position: 'fixed', color: y > 100 ? 'red' : 'blue' }}>
-        useScroll
-      </h3>
+      <Scroll scroll={y}>useScroll</Scroll>
+      <br />
+      <ImgBox ref={element}>
+        <img
+          src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg"
+          alt="바다이미지"
+        />
+        <Button onClick={exitFullScreen}>원래 화면으로 바꿔줘!</Button>
+      </ImgBox>
+      <Button onClick={triggerFullScreen}>꽉 찬 화면으로 바꿔줘!</Button>
     </UseEffectSection>
   );
 };
 
 export default UseEffect;
 
+const Button = styled.button`
+  width: 150px;
+`;
+
+const ImgBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+`;
+
+const Scroll = styled.h3`
+  color: ${props => (props.scroll > 100 ? 'red' : 'blue')};
+`;
+
 const UseEffectSection = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   height: 200vh;
 `;

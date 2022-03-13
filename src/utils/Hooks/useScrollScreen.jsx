@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 export const useScroll = () => {
   const [state, setState] = useState({
@@ -15,4 +15,22 @@ export const useScroll = () => {
   return state;
 };
 
-export const useScreen = () => {};
+export const useScreen = callBack => {
+  const element = useRef();
+  const checkScreen = isFull => {
+    if (callBack && typeof callBack === 'function') {
+      callBack(isFull);
+    }
+  };
+  const triggerFullScreen = () => {
+    if (element.current) {
+      element.current.requestFullscreen();
+    }
+    checkScreen(true);
+  };
+  const exitFullScreen = () => {
+    document.exitFullscreen();
+    checkScreen(false);
+  };
+  return { element, triggerFullScreen, exitFullScreen };
+};
