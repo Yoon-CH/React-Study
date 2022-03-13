@@ -5,7 +5,9 @@ import {
   useTitle,
   useBeforeLeave,
   useFadeIn,
+  useScroll,
 } from '../../utils/Hooks';
+import styled from 'styled-components';
 
 const UseEffect = () => {
   const [number, setNumber] = useState(0);
@@ -28,12 +30,14 @@ const UseEffect = () => {
 
   const fadeInp = useFadeIn(6);
 
+  const { y } = useScroll();
+
   useEffect(() => {
     hello();
   }, [number]);
 
   return (
-    <>
+    <UseEffectSection>
       <h2>useEffect</h2>
       <div>
         <button onClick={() => setNumber(number + 1)}>{number}</button>
@@ -51,8 +55,16 @@ const UseEffect = () => {
       <br />
       <h3 {...fadeInH3}>useFadeIn 효과</h3>
       <p {...fadeInp}>잘 보이나요?</p>
-    </>
+      <br />
+      <h3 style={{ position: 'fixed', color: y > 100 ? 'red' : 'blue' }}>
+        useScroll
+      </h3>
+    </UseEffectSection>
   );
 };
 
 export default UseEffect;
+
+const UseEffectSection = styled.div`
+  height: 200vh;
+`;
