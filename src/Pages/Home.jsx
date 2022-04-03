@@ -11,6 +11,9 @@ const Home = () => {
       <StudyBox>
         <LinkButton to="/Hooks">React Hooks</LinkButton>
       </StudyBox>
+      <StudyBox>
+        <LinkButton to="/Twitter">React Twitter</LinkButton>
+      </StudyBox>
     </StudySection>
   );
 };
