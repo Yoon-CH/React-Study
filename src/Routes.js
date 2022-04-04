@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Home from './Pages/Home';
 import TwitterAuth from './Components/ReactTwitter/TwitterAuth';
@@ -6,8 +6,7 @@ import TwitterHome from './Components/ReactTwitter/TwitterHome';
 import ReactBasicStudy from './Pages/ReactBasicStudy';
 import ReactHookStudy from './Pages/ReactHookStudy';
 
-function Router() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+function Router({ isLoggedIn }) {
   return (
     <BrowserRouter>
       <Routes>
