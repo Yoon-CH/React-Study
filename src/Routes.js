@@ -1,18 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Home from './Pages/Home';
+import TwitterAuth from './Components/ReactTwitter/TwitterAuth';
+import TwitterHome from './Components/ReactTwitter/TwitterHome';
 import ReactBasicStudy from './Pages/ReactBasicStudy';
 import ReactHookStudy from './Pages/ReactHookStudy';
-import ReactTwitter from './Pages/ReactTwitter';
 
 function Router() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   return (
     <BrowserRouter>
       <Routes>
         <Route exact path="/" element={<Home />} />
         <Route path="/Basic" element={<ReactBasicStudy />} />
         <Route path="/Hooks" element={<ReactHookStudy />} />
-        <Route path="/Twitter" element={<ReactTwitter />} />
+        {isLoggedIn ? (
+          <Route path="/Twitter" element={<TwitterHome />} />
+        ) : (
+          <Route path="/Twitter" element={<TwitterAuth />} />
+        )}
       </Routes>
     </BrowserRouter>
   );
