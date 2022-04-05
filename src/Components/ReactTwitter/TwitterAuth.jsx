@@ -1,27 +1,43 @@
 import React, { useState } from 'react';
+import { authService } from '../../firebaseData';
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from 'firebase/auth';
 
 const TwitterAuth = () => {
-  const [form, setForm] = useState({ email: '', password: '' });
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [newAccount, setNewAccount] = useState(true);
 
-  const onChange = ({ target: { name, value } }) => {
-    setForm({ ...form, [name]: value });
+  const onChange = event => {
+    const {
+      target: { name, value },
+    } = event;
+    if (name === 'email') {
+      setEmail(value);
+    } else if (name === 'password') {
+      setPassword(value);
+    }
   };
-  // const [email, setEmail] = useState('');
-  // const [password, setPassword] = useState('');
 
-  // const onChange = event => {
-  //   const {
-  //     target: { name, value },
-  //   } = event;
-  //   if (name === 'email') {
-  //     setEmail(value);
-  //   } else if (name === 'password') {
-  //     setPassword(value);
-  //   }
-  // };
-
-  const onSubmit = event => {
+  const onSubmit = async event => {
     event.preventDefault();
+    try {
+      let data;
+      if (newAccount) {
+        data = await createUserWithEmailAndPassword(
+          authService,
+          email,
+          password
+        );
+      } else {
+        data = await signInWithEmailAndPassword(authService, email, password);
+      }
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -29,10 +45,10 @@ const TwitterAuth = () => {
       <form onSubmit={onSubmit}>
         <input
           name="email"
-          type="text"
+          type="email"
           placeholder="Email"
           required
-          value={form.email}
+          value={email}
           onChange={onChange}
         />
         <input
@@ -40,10 +56,10 @@ const TwitterAuth = () => {
           type="password"
           placeholder="password"
           required
-          value={form.password}
+          value={password}
           onChange={onChange}
         />
-        <input type="submit" value="Log In" />
+        <input type="submit" value={newAccount ? 'Create Account' : 'Log In'} />
       </form>
       <div>
         <button>Continue With Google</button>
