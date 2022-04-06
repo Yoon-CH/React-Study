@@ -3,6 +3,8 @@ import { authService } from '../../firebaseData';
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  GoogleAuthProvider,
+  signInWithPopup,
 } from 'firebase/auth';
 
 const TwitterAuth = () => {
@@ -45,6 +47,16 @@ const TwitterAuth = () => {
     setNewAccount(prev => !prev);
   };
 
+  const onSocialClick = async event => {
+    const name = event.target.name;
+    let provider;
+    if (name === 'google') {
+      provider = new GoogleAuthProvider();
+    }
+    const data = await signInWithPopup(authService, provider);
+    console.log(data);
+  };
+
   return (
     <>
       <form onSubmit={onSubmit}>
@@ -74,7 +86,9 @@ const TwitterAuth = () => {
         </span>
       </form>
       <div>
-        <button>Continue With Google</button>
+        <button onClick={onSocialClick} name="google">
+          Continue With Google
+        </button>
       </div>
     </>
   );
