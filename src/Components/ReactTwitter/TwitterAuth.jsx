@@ -9,6 +9,7 @@ const TwitterAuth = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [newAccount, setNewAccount] = useState(true);
+  const [error, setError] = useState('');
 
   const onChange = event => {
     const {
@@ -36,8 +37,12 @@ const TwitterAuth = () => {
       }
       console.log(data);
     } catch (error) {
-      console.log(error);
+      setError(error.message);
     }
+  };
+
+  const toggleAccount = () => {
+    setNewAccount(prev => !prev);
   };
 
   return (
@@ -59,7 +64,14 @@ const TwitterAuth = () => {
           value={password}
           onChange={onChange}
         />
-        <input type="submit" value={newAccount ? 'Create Account' : 'Log In'} />
+        <input
+          type="submit"
+          value={newAccount ? 'Create Account' : 'Sign In'}
+        />
+        {error}
+        <span onClick={toggleAccount}>
+          {newAccount ? 'Sign In' : 'Create Account'}
+        </span>
       </form>
       <div>
         <button>Continue With Google</button>
