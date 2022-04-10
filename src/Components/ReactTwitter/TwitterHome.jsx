@@ -1,9 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { dbService } from '../../firebaseData';
-import { addDoc, collection, getDocs, query } from 'firebase/firestore';
+import {
+  addDoc,
+  collection,
+  onSnapshot,
+  query,
+  orderBy,
+} from 'firebase/firestore';
 import Navigation from './Navigation';
 
-const TwitterHome = isLoggedIn => {
+const TwitterHome = ({ isLoggedIn, userObj }) => {
   const [nweet, setNweet] = useState('');
   const [nweets, setNweets] = useState([]);
 
@@ -11,8 +17,9 @@ const TwitterHome = isLoggedIn => {
     e.preventDefault();
     try {
       const docRef = await addDoc(collection(dbService, 'nweets'), {
-        nweet,
+        text: nweet,
         createdAt: Date.now(),
+        creatorId: userObj.uid,
       });
       console.log('Document written with ID: ', docRef.id);
     } catch (error) {
@@ -28,19 +35,18 @@ const TwitterHome = isLoggedIn => {
     setNweet(value);
   };
 
-  const getNweets = async () => {
-    const q = query(collection(dbService, 'nweets'));
-    const querySnapshot = await getDocs(q);
-    querySnapshot.forEach(doc => {
-      const nweetObj = {
-        ...doc.data(),
-        id: doc.id,
-      };
-      setNweets(prev => [nweetObj, ...prev]);
-    });
-  };
   useEffect(() => {
-    getNweets();
+    const q = query(
+      collection(dbService, 'nweets'),
+      orderBy('createdAt', 'desc')
+    );
+    onSnapshot(q, snapshot => {
+      const nweetArr = snapshot.docs.map(doc => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+      setNweets(nweetArr);
+    });
   }, []);
 
   return (
@@ -59,7 +65,7 @@ const TwitterHome = isLoggedIn => {
       <div>
         {nweets.map(data => (
           <div key={data.id}>
-            <h4>{data.nweet}</h4>
+            <h4>{data.text}</h4>
           </div>
         ))}
       </div>
