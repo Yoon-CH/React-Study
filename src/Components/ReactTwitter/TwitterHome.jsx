@@ -8,6 +8,7 @@ import {
   orderBy,
 } from 'firebase/firestore';
 import Navigation from './Navigation';
+import Nweet from './Nweet';
 
 const TwitterHome = ({ isLoggedIn, userObj }) => {
   const [nweet, setNweet] = useState('');
@@ -63,10 +64,12 @@ const TwitterHome = ({ isLoggedIn, userObj }) => {
         <input type="submit" value="Nweet" />
       </form>
       <div>
-        {nweets.map(data => (
-          <div key={data.id}>
-            <h4>{data.text}</h4>
-          </div>
+        {nweets.map(nweet => (
+          <Nweet
+            key={nweet.id}
+            nweetObj={nweet}
+            isOwner={nweet.creatorId === userObj.uid}
+          />
         ))}
       </div>
     </>
