@@ -4,16 +4,12 @@ import { authService } from '../firebaseData';
 
 const Main = () => {
   const [init, setInit] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userObj, setUserObj] = useState(null);
 
   useEffect(() => {
     authService.onAuthStateChanged(user => {
       if (user) {
-        setIsLoggedIn(true);
         setUserObj(user);
-      } else {
-        setIsLoggedIn(false);
       }
       setInit(true);
     });
@@ -21,7 +17,7 @@ const Main = () => {
   return (
     <>
       {init ? (
-        <Router isLoggedIn={isLoggedIn} userObj={userObj} />
+        <Router isLoggedIn={Boolean(userObj)} userObj={userObj} />
       ) : (
         'Initializing...'
       )}
