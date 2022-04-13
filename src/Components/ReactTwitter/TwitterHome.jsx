@@ -13,6 +13,7 @@ import Nweet from './Nweet';
 const TwitterHome = ({ isLoggedIn, userObj }) => {
   const [nweet, setNweet] = useState('');
   const [nweets, setNweets] = useState([]);
+  const [imageFile, setImageFile] = useState();
 
   const onSubmit = async e => {
     e.preventDefault();
@@ -43,9 +44,16 @@ const TwitterHome = ({ isLoggedIn, userObj }) => {
     const theFile = files[0];
     const reader = new FileReader();
     reader.onloadend = finishedEvent => {
-      console.log(finishedEvent);
+      const {
+        currentTarget: { result },
+      } = finishedEvent;
+      setImageFile(result);
     };
     reader.readAsDataURL(theFile);
+  };
+
+  const onClearPhoto = () => {
+    setImageFile(null);
   };
 
   useEffect(() => {
@@ -75,6 +83,12 @@ const TwitterHome = ({ isLoggedIn, userObj }) => {
         />
         <input type="file" accept="image/*" onChange={onFileChange} />
         <input type="submit" value="Nweet" />
+        {imageFile && (
+          <div>
+            <img src={imageFile} alt="미리보기" width="50px" height="50px" />
+            <button onClick={onClearPhoto}>Clear</button>
+          </div>
+        )}
       </form>
       <div>
         {nweets.map(nweet => (
