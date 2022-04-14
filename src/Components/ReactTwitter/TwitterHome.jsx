@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { dbService } from '../../firebaseData';
+import { dbService, storageService } from '../../firebaseData';
 import {
   addDoc,
   collection,
@@ -7,8 +7,10 @@ import {
   query,
   orderBy,
 } from 'firebase/firestore';
+import { ref, uploadString } from 'firebase/storage';
 import Navigation from './Navigation';
 import Nweet from './Nweet';
+import { v4 as uuidv4 } from 'uuid';
 
 const TwitterHome = ({ isLoggedIn, userObj }) => {
   const [nweet, setNweet] = useState('');
@@ -17,17 +19,20 @@ const TwitterHome = ({ isLoggedIn, userObj }) => {
 
   const onSubmit = async e => {
     e.preventDefault();
-    try {
-      const docRef = await addDoc(collection(dbService, 'nweets'), {
-        text: nweet,
-        createdAt: Date.now(),
-        creatorId: userObj.uid,
-      });
-      console.log('Document written with ID: ', docRef.id);
-    } catch (error) {
-      console.error('Error adding document: ', error);
-    }
-    setNweet('');
+    const fileRef = ref(storageService, `${userObj.uid}/${uuidv4()}`);
+    const response = await uploadString(fileRef, imageFile, 'data_url');
+    console.log(response);
+    // try {
+    //   const docRef = await addDoc(collection(dbService, 'nweets'), {
+    //     text: nweet,
+    //     createdAt: Date.now(),
+    //     creatorId: userObj.uid,
+    //   });
+    //   console.log('Document written with ID: ', docRef.id);
+    // } catch (error) {
+    //   console.error('Error adding document: ', error);
+    // }
+    // setNweet('');
   };
 
   const onChange = event => {
