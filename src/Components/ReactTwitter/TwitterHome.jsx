@@ -7,7 +7,7 @@ import {
   query,
   orderBy,
 } from 'firebase/firestore';
-import { ref, uploadString } from 'firebase/storage';
+import { ref, uploadString, getDownloadURL } from 'firebase/storage';
 import Navigation from './Navigation';
 import Nweet from './Nweet';
 import { v4 as uuidv4 } from 'uuid';
@@ -19,20 +19,21 @@ const TwitterHome = ({ isLoggedIn, userObj }) => {
 
   const onSubmit = async e => {
     e.preventDefault();
-    const fileRef = ref(storageService, `${userObj.uid}/${uuidv4()}`);
-    const response = await uploadString(fileRef, imageFile, 'data_url');
-    console.log(response);
-    // try {
-    //   const docRef = await addDoc(collection(dbService, 'nweets'), {
-    //     text: nweet,
-    //     createdAt: Date.now(),
-    //     creatorId: userObj.uid,
-    //   });
-    //   console.log('Document written with ID: ', docRef.id);
-    // } catch (error) {
-    //   console.error('Error adding document: ', error);
-    // }
-    // setNweet('');
+    let imageFileURL = '';
+    if (imageFile !== '') {
+      const fileRef = ref(storageService, `${userObj.uid}/${uuidv4()}`);
+      const uploadFile = await uploadString(fileRef, imageFile, 'data_url');
+      imageFileURL = await getDownloadURL(uploadFile.ref);
+      const nweetPosting = {
+        nweet,
+        createdAt: Date.now(),
+        creatorId: userObj.uid,
+        imageFileURL,
+      };
+      await addDoc(collection(dbService, 'nweets'), nweetPosting);
+      setNweet('');
+      setImageFile('');
+    }
   };
 
   const onChange = event => {
