@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { dbService } from '../../firebaseData';
+import { dbService, storageService } from '../../firebaseData';
 import { doc, deleteDoc, updateDoc } from 'firebase/firestore';
+import { ref, deleteObject } from 'firebase/storage';
 
 const Nweet = ({ nweetObj, isOwner }) => {
   const [editing, setEditing] = useState(false);
@@ -12,6 +13,7 @@ const Nweet = ({ nweetObj, isOwner }) => {
     const deleteData = window.confirm('정말로 Nweet를 삭제하시겠습니까?');
     if (deleteData) {
       await deleteDoc(NweetTextRef);
+      await deleteObject(ref(storageService, nweetObj.imageFileURL));
     }
   };
 
