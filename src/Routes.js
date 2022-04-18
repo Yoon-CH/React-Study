@@ -24,7 +24,7 @@ function Router({ isLoggedIn, userObj }) {
             />
             <Route
               path="/Twitter/Profile"
-              element={<Profile userObj={userObj} />}
+              element={<Profile isLoggedIn={isLoggedIn} userObj={userObj} />}
             />
           </>
         ) : (

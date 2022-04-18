@@ -78,7 +78,7 @@ const TwitterHome = ({ isLoggedIn, userObj }) => {
 
   return (
     <>
-      {isLoggedIn && <Navigation />}
+      {isLoggedIn && <Navigation userObj={userObj} />}
       <form onSubmit={onSubmit}>
         <input
           type="text"
