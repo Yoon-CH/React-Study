@@ -7,7 +7,7 @@ import ReactBasicStudy from './Pages/ReactBasicStudy';
 import ReactHookStudy from './Pages/ReactHookStudy';
 import Profile from './Components/ReactTwitter/Profile';
 
-function Router({ isLoggedIn, userObj }) {
+function Router({ refreshUser, isLoggedIn, userObj }) {
   return (
     <BrowserRouter>
       <Routes>
@@ -24,7 +24,13 @@ function Router({ isLoggedIn, userObj }) {
             />
             <Route
               path="/Twitter/Profile"
-              element={<Profile isLoggedIn={isLoggedIn} userObj={userObj} />}
+              element={
+                <Profile
+                  isLoggedIn={isLoggedIn}
+                  userObj={userObj}
+                  refreshUser={refreshUser}
+                />
+              }
             />
           </>
         ) : (

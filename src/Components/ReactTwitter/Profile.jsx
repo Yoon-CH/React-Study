@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { authService, dbService } from '../../firebaseData';
-import { collection, getDocs, query, where } from '@firebase/firestore';
+import { collection, getDocs, query, where } from 'firebase/firestore';
 import { orderBy } from 'firebase/firestore';
+import { updateProfile } from 'firebase/auth';
 import Navigation from './Navigation';
 
-const Profile = ({ isLoggedIn, userObj }) => {
+const Profile = ({ refreshUser, isLoggedIn, userObj }) => {
   const navigate = useNavigate();
   const [newDisplayName, setNewDisplayName] = useState(userObj.displayName);
 
@@ -33,8 +34,12 @@ const Profile = ({ isLoggedIn, userObj }) => {
     setNewDisplayName(value);
   };
 
-  const onSubmit = event => {
+  const onSubmit = async event => {
     event.preventDefault();
+    if (userObj.displayName !== newDisplayName) {
+      await updateProfile(userObj, { displayName: newDisplayName });
+      refreshUser();
+    }
   };
 
   useEffect(() => {
@@ -49,7 +54,7 @@ const Profile = ({ isLoggedIn, userObj }) => {
           onChange={onChange}
           type="text"
           placeholder="Display Name"
-          value={newDisplayName}
+          value={newDisplayName || ''}
         />
         <input type="submit" value="Update Profile" />
       </form>
