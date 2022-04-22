@@ -20,6 +20,8 @@ const Main = () => {
     authService.onAuthStateChanged(user => {
       if (user) {
         setUserObj(user);
+      } else {
+        setInit(null);
       }
       setInit(true);
     });
