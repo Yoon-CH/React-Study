@@ -4,6 +4,7 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
 } from 'firebase/auth';
+import styled from 'styled-components';
 
 const AuthForm = () => {
   const [email, setEmail] = useState('');
@@ -46,8 +47,8 @@ const AuthForm = () => {
   };
 
   return (
-    <form onSubmit={onSubmit}>
-      <input
+    <Form onSubmit={onSubmit}>
+      <Input
         name="email"
         type="email"
         placeholder="Email"
@@ -55,7 +56,7 @@ const AuthForm = () => {
         value={email}
         onChange={onChange}
       />
-      <input
+      <Input
         name="password"
         type="password"
         placeholder="password"
@@ -63,13 +64,32 @@ const AuthForm = () => {
         value={password}
         onChange={onChange}
       />
-      <input type="submit" value={newAccount ? 'Create Account' : 'Sign In'} />
+      <Input type="submit" value={newAccount ? 'Create Account' : 'Sign In'} />
       {error}
-      <span onClick={toggleAccount}>
+      <Span onClick={toggleAccount}>
         {newAccount ? 'Sign In' : 'Create Account'}
-      </span>
-    </form>
+      </Span>
+    </Form>
   );
 };
 
 export default AuthForm;
+
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 300px;
+`;
+
+const Input = styled.input`
+  margin-bottom: 20px;
+  width: 300px;
+  height: 40px;
+  border: 1px solid black;
+  border-radius: 10px;
+`;
+
+const Span = styled.span`
+  margin-bottom: 20px;
+`;

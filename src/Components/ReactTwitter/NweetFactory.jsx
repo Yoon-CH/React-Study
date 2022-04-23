@@ -3,6 +3,7 @@ import { dbService, storageService } from '../../firebaseData';
 import { addDoc, collection } from 'firebase/firestore';
 import { ref, uploadString, getDownloadURL } from 'firebase/storage';
 import { v4 as uuidv4 } from 'uuid';
+import styled from 'styled-components';
 
 const NweetFactory = ({ userObj }) => {
   const [nweet, setNweet] = useState('');
@@ -54,26 +55,29 @@ const NweetFactory = ({ userObj }) => {
   };
 
   return (
-    <>
-      <form onSubmit={onSubmit}>
-        <input
-          type="text"
-          value={nweet}
-          onChange={onChange}
-          placeholder="What's on Your Mind?"
-          maxLength={120}
-        />
-        <input type="file" accept="image/*" onChange={onFileChange} />
-        <input type="submit" value="Nweet" />
-        {imageFile && (
-          <div>
-            <img src={imageFile} alt="미리보기" width="50px" height="50px" />
-            <button onClick={onClearPhoto}>Clear</button>
-          </div>
-        )}
-      </form>
-    </>
+    <Form onSubmit={onSubmit}>
+      <input
+        type="text"
+        value={nweet}
+        onChange={onChange}
+        placeholder="What's on Your Mind?"
+        maxLength={120}
+      />
+      <input type="file" accept="image/*" onChange={onFileChange} />
+      <input type="submit" value="Nweet" />
+      {imageFile && (
+        <div>
+          <img src={imageFile} alt="미리보기" width="50px" height="50px" />
+          <button onClick={onClearPhoto}>Clear</button>
+        </div>
+      )}
+    </Form>
   );
 };
 
 export default NweetFactory;
+
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+`;

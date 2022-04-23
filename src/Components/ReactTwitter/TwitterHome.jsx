@@ -4,6 +4,7 @@ import { collection, onSnapshot, query, orderBy } from 'firebase/firestore';
 import Navigation from './Navigation';
 import Nweet from './Nweet';
 import NweetFactory from './NweetFactory';
+import styled from 'styled-components';
 
 const TwitterHome = ({ isLoggedIn, userObj }) => {
   const [nweets, setNweets] = useState([]);
@@ -23,7 +24,7 @@ const TwitterHome = ({ isLoggedIn, userObj }) => {
   }, []);
 
   return (
-    <>
+    <HomeSection>
       {isLoggedIn && <Navigation userObj={userObj} />}
       <NweetFactory userObj={userObj} />
       <div>
@@ -35,8 +36,16 @@ const TwitterHome = ({ isLoggedIn, userObj }) => {
           />
         ))}
       </div>
-    </>
+    </HomeSection>
   );
 };
 
 export default TwitterHome;
+
+const HomeSection = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 200px;
+`;
