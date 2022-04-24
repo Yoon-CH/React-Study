@@ -88,8 +88,10 @@ const Input = styled.input`
   height: 40px;
   border: 1px solid black;
   border-radius: 10px;
+  cursor: pointer;
 `;
 
 const Span = styled.span`
   margin-bottom: 20px;
+  cursor: pointer;
 `;

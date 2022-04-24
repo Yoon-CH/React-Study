@@ -5,14 +5,14 @@ import styled from 'styled-components';
 const Navigation = ({ userObj }) => {
   return (
     <>
-      <ui>
+      <ul>
         <NavigationBox>
           <Link to="/Twitter">Home</Link>
         </NavigationBox>
         <NavigationBox>
           <Link to="/Twitter/Profile">{userObj.displayName} Profile</Link>
         </NavigationBox>
-      </ui>
+      </ul>
     </>
   );
 };

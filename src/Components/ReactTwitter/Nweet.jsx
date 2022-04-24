@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { dbService, storageService } from '../../firebaseData';
 import { doc, deleteDoc, updateDoc } from 'firebase/firestore';
 import { ref, deleteObject } from 'firebase/storage';
+import styled from 'styled-components';
 
 const Nweet = ({ nweetObj, isOwner }) => {
   const [editing, setEditing] = useState(false);
@@ -40,39 +41,69 @@ const Nweet = ({ nweetObj, isOwner }) => {
     <div>
       {editing ? (
         <>
-          <form onSubmit={onSubmit}>
-            <input
+          <Form onSubmit={onSubmit}>
+            <Input
               type="text"
               placeholder="Edit your Nweet"
               value={newNweet}
               required
               onChange={onChange}
             />
-            <input type="submit" value="Update Nweet" />
-          </form>
-          <button onClick={toggleEditing}>Cancel</button>
+            <Input type="submit" value="Update Nweet" />
+            <button onClick={toggleEditing}>Cancel</button>
+          </Form>
         </>
       ) : (
-        <>
+        <EditForm>
           <h4>{nweetObj.text}</h4>
           {nweetObj.imageFileURL && (
-            <img
-              src={nweetObj.imageFileURL}
-              alt="nweetImage"
-              width="50px"
-              height=" 50px"
-            />
+            <Image src={nweetObj.imageFileURL} alt="nweetImage" />
           )}
           {isOwner && (
             <>
-              <button onClick={onDeleteClick}>Delete Nweet</button>
-              <button onClick={toggleEditing}>Edit Nweet</button>
+              <Button onClick={onDeleteClick}>Delete Nweet</Button>
+              <Button onClick={toggleEditing}>Edit Nweet</Button>
             </>
           )}
-        </>
+        </EditForm>
       )}
     </div>
   );
 };
 
 export default Nweet;
+
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+`;
+
+const Input = styled.input`
+  margin-bottom: 20px;
+  width: 300px;
+  height: 40px;
+  border: 1px solid black;
+  border-radius: 10px;
+  cursor: pointer;
+`;
+
+const EditForm = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const Image = styled.img`
+  width: 100px;
+  height: 100px;
+  border-radius: 10px;
+`;
+
+const Button = styled.button`
+  margin: 10px;
+  width: 200px;
+  height: 40px;
+  border: 1px solid black;
+  border-radius: 10px;
+  cursor: pointer;
+`;

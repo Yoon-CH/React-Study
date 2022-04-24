@@ -56,7 +56,7 @@ const NweetFactory = ({ userObj }) => {
 
   return (
     <Form onSubmit={onSubmit}>
-      <input
+      <Input
         type="text"
         value={nweet}
         onChange={onChange}
@@ -64,7 +64,7 @@ const NweetFactory = ({ userObj }) => {
         maxLength={120}
       />
       <input type="file" accept="image/*" onChange={onFileChange} />
-      <input type="submit" value="Nweet" />
+      <Input type="submit" value="Nweet" />
       {imageFile && (
         <div>
           <img src={imageFile} alt="미리보기" width="50px" height="50px" />
@@ -80,4 +80,13 @@ export default NweetFactory;
 const Form = styled.form`
   display: flex;
   flex-direction: column;
+`;
+
+const Input = styled.input`
+  margin-bottom: 20px;
+  width: 300px;
+  height: 40px;
+  border: 1px solid black;
+  border-radius: 10px;
+  cursor: pointer;
 `;

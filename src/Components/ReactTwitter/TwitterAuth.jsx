@@ -18,9 +18,9 @@ const TwitterAuth = () => {
   return (
     <AuthSection>
       <AuthForm />
-      <button onClick={onSocialClick} name="google">
-        Continue With Google
-      </button>
+      <Button onClick={onSocialClick} name="google">
+        ☛ Continue With Google
+      </Button>
     </AuthSection>
   );
 };
@@ -32,4 +32,12 @@ const AuthSection = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+`;
+
+const Button = styled.button`
+  width: 300px;
+  height: 40px;
+  border: 1px solid black;
+  border-radius: 10px;
+  cursor: pointer;
 `;
