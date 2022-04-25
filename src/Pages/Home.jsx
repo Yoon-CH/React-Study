@@ -14,6 +14,9 @@ const Home = () => {
       <StudyBox>
         <LinkButton to="/Twitter">React Twitter</LinkButton>
       </StudyBox>
+      <StudyBox>
+        <LinkButton to="/Movie">React Movie</LinkButton>
+      </StudyBox>
     </StudySection>
   );
 };
