@@ -15,7 +15,7 @@ const Home = () => {
         <LinkButton to="/Twitter">React Twitter</LinkButton>
       </StudyBox>
       <StudyBox>
-        <LinkButton to="/Movie">React Movie</LinkButton>
+        <LinkButton to="/Contact">React Contact</LinkButton>
       </StudyBox>
     </StudySection>
   );

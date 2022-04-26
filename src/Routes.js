@@ -6,8 +6,7 @@ import TwitterHome from './Components/ReactTwitter/TwitterHome';
 import ReactBasicStudy from './Pages/ReactBasicStudy';
 import ReactHookStudy from './Pages/ReactHookStudy';
 import Profile from './Components/ReactTwitter/Profile';
-import ReactMovie from './Pages/ReactMovie';
-import MovieDetail from './Components/ReactMovie/MovieDetail';
+import ReactContact from './Pages/ReactContact';
 
 function Router({ refreshUser, isLoggedIn, userObj }) {
   return (
@@ -38,8 +37,7 @@ function Router({ refreshUser, isLoggedIn, userObj }) {
         ) : (
           <Route path="/Twitter" element={<TwitterAuth />} />
         )}
-        <Route path="/Movie" element={<ReactMovie />} />
-        <Route path="/Movie:id" element={<MovieDetail />} />
+        <Route path="/Contact" element={<ReactContact />} />
       </Routes>
     </BrowserRouter>
   );
