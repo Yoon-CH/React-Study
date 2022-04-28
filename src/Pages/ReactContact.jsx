@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import ContactInfo from '../Components/ReactContact/ContactInfo';
 import ContactDetails from '../Components/ReactContact/ContactDetails';
+import ContactCreate from '../Components/ReactContact/ContactCreate';
 
 const ReactContact = () => {
   const [data, setData] = useState([
@@ -22,6 +23,10 @@ const ReactContact = () => {
   const handleClick = key => {
     setSelectKey(key);
     console.log(selectKey);
+  };
+
+  const handleCreate = contact => {
+    setData(data => [...data, contact]);
   };
 
   const mapToComponent = data => {
@@ -48,6 +53,7 @@ const ReactContact = () => {
       />
       <div>{mapToComponent(data)}</div>
       <ContactDetails isSelected={selectKey !== -1} contact={data[selectKey]} />
+      <ContactCreate onCreate={handleCreate} />
     </>
   );
 };
