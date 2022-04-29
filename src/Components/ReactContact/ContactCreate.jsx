@@ -11,35 +11,32 @@ const ContactCreate = ({ onCreate }) => {
     });
   };
 
-  const handleClick = event => {
+  const handleSubmit = event => {
     event.preventDefault();
     const contact = {
       name: createInfo.name,
       phone: createInfo.phone,
     };
     onCreate(contact);
-    setCreateInfo({
-      name: '',
-      phone: '',
-    });
+    setCreateInfo({ name: '', phone: '' });
   };
 
   return (
     <>
       <h2>Create Contact</h2>
-      <form onSubmit={handleClick}>
+      <form onSubmit={handleSubmit}>
         <input
           type="text"
           name="name"
           placeholder="name"
-          defaultValue={createInfo.name}
+          value={createInfo.name}
           onChange={handleChange}
         />
         <input
           type="number"
           name="phone"
           placeholder="phone"
-          defaultValue={createInfo.phone}
+          value={createInfo.phone}
           onChange={handleChange}
         />
         <input type="submit" value="Create" />

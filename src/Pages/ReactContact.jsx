@@ -5,10 +5,10 @@ import ContactCreate from '../Components/ReactContact/ContactCreate';
 
 const ReactContact = () => {
   const [data, setData] = useState([
-    { name: 'Alice', phone: '010 - 0000 - 1111' },
-    { name: 'Brad', phone: '010 - 0000 - 2222' },
-    { name: 'Cab', phone: '010 - 0000 - 3333' },
-    { name: 'Druid', phone: '010 - 0000 - 4444' },
+    { id: 1, name: 'Alice', phone: '010 - 0000 - 1111' },
+    { id: 2, name: 'Brad', phone: '010 - 0000 - 2222' },
+    { id: 3, name: 'Cab', phone: '010 - 0000 - 3333' },
+    { id: 4, name: 'Druid', phone: '010 - 0000 - 4444' },
   ]);
   const [keyword, setKeyword] = useState('');
   const [selectKey, setSelectKey] = useState(-1);
