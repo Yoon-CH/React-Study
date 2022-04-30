@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import propTypes from 'prop-types';
 
 const ContactCreate = ({ onCreate }) => {
   const [createInfo, setCreateInfo] = useState({ name: '', phone: '' });
+  const nextId = useRef(4);
 
   const handleChange = event => {
     setCreateInfo({
@@ -14,6 +15,7 @@ const ContactCreate = ({ onCreate }) => {
   const handleSubmit = event => {
     event.preventDefault();
     const contact = {
+      id: (nextId.current += 1),
       name: createInfo.name,
       phone: createInfo.phone,
     };
@@ -33,7 +35,7 @@ const ContactCreate = ({ onCreate }) => {
           onChange={handleChange}
         />
         <input
-          type="number"
+          type="text"
           name="phone"
           placeholder="phone"
           value={createInfo.phone}

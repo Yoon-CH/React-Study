@@ -1,10 +1,10 @@
 import React from 'react';
 
-const ContactDetails = ({ isSelected, contact }) => {
+const ContactDetails = ({ isSelectedItem, reMove }) => {
   const detail = (
     <div>
-      <p>{contact.name}</p>
-      <p>{contact.phone}</p>
+      <p>{isSelectedItem.name}</p>
+      <p>{isSelectedItem.phone}</p>
     </div>
   );
   const noDetail = <div>No select</div>;
@@ -12,8 +12,8 @@ const ContactDetails = ({ isSelected, contact }) => {
   return (
     <>
       <h2>Details</h2>
-      {isSelected ? detail : noDetail}
-      <button>Remove</button>
+      {isSelectedItem.id ? detail : noDetail}
+      <button onClick={() => reMove(isSelectedItem.id)}>Remove</button>
     </>
   );
 };

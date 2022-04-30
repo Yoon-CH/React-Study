@@ -11,7 +11,11 @@ const ReactContact = () => {
     { id: 4, name: 'Druid', phone: '010 - 0000 - 4444' },
   ]);
   const [keyword, setKeyword] = useState('');
-  const [selectKey, setSelectKey] = useState(-1);
+  const [selectKey, setSelectKey] = useState({
+    id: null,
+    name: null,
+    phone: null,
+  });
 
   const handleChange = event => {
     const {
@@ -20,13 +24,18 @@ const ReactContact = () => {
     setKeyword(value);
   };
 
-  const handleClick = key => {
-    setSelectKey(key);
-    console.log(selectKey);
+  const handleClick = item => {
+    console.log(`item: ${JSON.stringify(item)}`);
+    setSelectKey({ ...item });
   };
 
   const handleCreate = contact => {
     setData(data => [...data, contact]);
+  };
+
+  const handleRemove = id => {
+    setData(data.filter(item => item.id !== id));
+    setSelectKey({ id: null, name: null, phone: null });
   };
 
   const mapToComponent = data => {
@@ -34,9 +43,13 @@ const ReactContact = () => {
     data = data.filter(contact => {
       return contact.name.toLowerCase().indexOf(keyword.toLowerCase()) > -1;
     });
-    return data.map((contact, i) => {
+    return data.map(contact => {
       return (
-        <ContactInfo contact={contact} key={i} onClick={() => handleClick(i)} />
+        <ContactInfo
+          contact={contact}
+          key={contact.id}
+          onClick={() => handleClick(contact)}
+        />
       );
     });
   };
@@ -52,7 +65,7 @@ const ReactContact = () => {
         value={keyword}
       />
       <div>{mapToComponent(data)}</div>
-      <ContactDetails isSelected={selectKey !== -1} contact={data[selectKey]} />
+      <ContactDetails isSelectedItem={selectKey} reMove={handleRemove} />
       <ContactCreate onCreate={handleCreate} />
     </>
   );
