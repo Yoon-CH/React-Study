@@ -33,6 +33,12 @@ const ReactContact = () => {
     setData(data => [...data, contact]);
   };
 
+  const handleEdit = upDateInfo => {
+    setData(data.id === upDateInfo.id ? [...data, upDateInfo] : data);
+    console.log(data);
+    console.log(upDateInfo);
+  };
+
   const handleRemove = id => {
     setData(data.filter(item => item.id !== id));
     setSelectKey({ id: null, name: null, phone: null });
@@ -65,7 +71,11 @@ const ReactContact = () => {
         value={keyword}
       />
       <div>{mapToComponent(data)}</div>
-      <ContactDetails isSelectedItem={selectKey} reMove={handleRemove} />
+      <ContactDetails
+        isSelectedItem={selectKey}
+        reMove={handleRemove}
+        editContact={handleEdit}
+      />
       <ContactCreate onCreate={handleCreate} />
     </>
   );
