@@ -9,16 +9,18 @@ const ContactDetails = ({ isSelectedItem, reMove, editContact }) => {
   });
 
   const handelToggle = () => {
+    setIsEdit(!isEdit);
     if (!isEdit) {
+      console.log(`전 : ${JSON.stringify(editInfo)}`);
       setEditInfo({
         id: isSelectedItem.id,
         name: isSelectedItem.name,
         phone: isSelectedItem.phone,
       });
     } else {
+      console.log(`후: ${JSON.stringify(editInfo)}`);
       editContact(editInfo);
     }
-    setIsEdit(!isEdit);
     console.log(isEdit);
   };
 
@@ -27,6 +29,12 @@ const ContactDetails = ({ isSelectedItem, reMove, editContact }) => {
       ...editInfo,
       [event.target.name]: event.target.value,
     });
+  };
+
+  const handleKeyPress = event => {
+    if (event.charCode === 13) {
+      handelToggle();
+    }
   };
 
   const detail = (
@@ -54,6 +62,7 @@ const ContactDetails = ({ isSelectedItem, reMove, editContact }) => {
           placeholder="phone"
           value={editInfo.phone}
           onChange={handleChange}
+          onKeyDown={handleKeyPress}
         />
       </p>
     </form>
@@ -77,6 +86,7 @@ const ContactDetails = ({ isSelectedItem, reMove, editContact }) => {
 
 ContactDetails.defaultProps = {
   contact: {
+    id: '',
     name: '',
     phone: '',
   },

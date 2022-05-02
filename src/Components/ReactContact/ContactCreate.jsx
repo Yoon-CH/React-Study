@@ -4,6 +4,7 @@ import propTypes from 'prop-types';
 const ContactCreate = ({ onCreate }) => {
   const [createInfo, setCreateInfo] = useState({ name: '', phone: '' });
   const nextId = useRef(4);
+  const focusInput = useRef();
 
   const handleChange = event => {
     setCreateInfo({
@@ -21,6 +22,13 @@ const ContactCreate = ({ onCreate }) => {
     };
     onCreate(contact);
     setCreateInfo({ name: '', phone: '' });
+    focusInput.current.focus();
+  };
+
+  const handleKeyPress = event => {
+    if (event.charCode === 13) {
+      handleSubmit();
+    }
   };
 
   return (
@@ -33,6 +41,7 @@ const ContactCreate = ({ onCreate }) => {
           placeholder="name"
           value={createInfo.name}
           onChange={handleChange}
+          ref={focusInput}
         />
         <input
           type="text"
@@ -40,6 +49,7 @@ const ContactCreate = ({ onCreate }) => {
           placeholder="phone"
           value={createInfo.phone}
           onChange={handleChange}
+          onKeyDown={handleKeyPress}
         />
         <input type="submit" value="Create" />
       </form>

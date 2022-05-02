@@ -34,7 +34,7 @@ const ReactContact = () => {
   };
 
   const handleEdit = upDateInfo => {
-    setData(data.id === upDateInfo.id ? [...data, upDateInfo] : data);
+    setData(data.id === upDateInfo.id ? [...data, ...upDateInfo] : data);
     console.log(data);
     console.log(upDateInfo);
   };
