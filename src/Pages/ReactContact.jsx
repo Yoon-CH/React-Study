@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ContactInfo from '../Components/ReactContact/ContactInfo';
 import ContactDetails from '../Components/ReactContact/ContactDetails';
 import ContactCreate from '../Components/ReactContact/ContactCreate';
@@ -59,6 +59,15 @@ const ReactContact = () => {
       );
     });
   };
+
+  useEffect(() => {
+    localStorage.setItem('data', JSON.stringify(data));
+  }, [data]);
+
+  useEffect(() => {
+    const getData = JSON.parse(localStorage.getItem('data'));
+    setData(getData);
+  }, []);
 
   return (
     <>
