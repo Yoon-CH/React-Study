@@ -3,13 +3,15 @@ import ContactInfo from '../Components/ReactContact/ContactInfo';
 import ContactDetails from '../Components/ReactContact/ContactDetails';
 import ContactCreate from '../Components/ReactContact/ContactCreate';
 
+const sample = [
+  { id: 1, name: 'Alice', phone: '010 - 0000 - 1111' },
+  { id: 2, name: 'Brad', phone: '010 - 0000 - 2222' },
+  { id: 3, name: 'Cab', phone: '010 - 0000 - 3333' },
+  { id: 4, name: 'Druid', phone: '010 - 0000 - 4444' },
+];
+
 const ReactContact = () => {
-  const [data, setData] = useState([
-    { id: 1, name: 'Alice', phone: '010 - 0000 - 1111' },
-    { id: 2, name: 'Brad', phone: '010 - 0000 - 2222' },
-    { id: 3, name: 'Cab', phone: '010 - 0000 - 3333' },
-    { id: 4, name: 'Druid', phone: '010 - 0000 - 4444' },
-  ]);
+  const [data, setData] = useState();
   const [keyword, setKeyword] = useState('');
   const [selectKey, setSelectKey] = useState({
     id: null,
@@ -34,9 +36,12 @@ const ReactContact = () => {
   };
 
   const handleEdit = upDateInfo => {
-    setData(data.id === upDateInfo.id ? [...data, ...upDateInfo] : data);
-    console.log(data);
-    console.log(upDateInfo);
+    setData(
+      data.map(info =>
+        info.id === upDateInfo.id ? { ...info, ...upDateInfo } : info
+      )
+    );
+    handleClick(upDateInfo);
   };
 
   const handleRemove = id => {
@@ -45,11 +50,11 @@ const ReactContact = () => {
   };
 
   const mapToComponent = data => {
-    data.sort();
-    data = data.filter(contact => {
+    data?.sort();
+    data = data?.filter(contact => {
       return contact.name.toLowerCase().indexOf(keyword.toLowerCase()) > -1;
     });
-    return data.map(contact => {
+    return data?.map(contact => {
       return (
         <ContactInfo
           contact={contact}
@@ -64,9 +69,20 @@ const ReactContact = () => {
     localStorage.setItem('data', JSON.stringify(data));
   }, [data]);
 
+  const local = localStorage.getItem('data');
+
   useEffect(() => {
-    const getData = JSON.parse(localStorage.getItem('data'));
-    setData(getData);
+    console.log(`1first!!!`);
+    console.log(`2getData: ${local}, typeof: ${typeof local}`);
+    if (!local) {
+      console.log(`3data없음`);
+      setData(sample);
+      localStorage.setItem('data', JSON.stringify(sample));
+    } else {
+      console.log(`4data있음`);
+      const getData = JSON.parse(local);
+      setData(getData);
+    }
   }, []);
 
   return (
